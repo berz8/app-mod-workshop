@@ -77,11 +77,11 @@ steps:
       - '--platform=managed'
       - '--port=80'
       - '--set-env-vars'
-      -   "DB_USER=$_DB_USER"
+      -   "DB_USER=$DB_USER"
       - '--set-env-vars'
-      -   "DB_HOST=$_DB_HOST"
+      -   "DB_HOST=$DB_HOST"
       - '--set-env-vars'
-      -   "DB_NAME=$_DB_NAME"
+      -   "DB_NAME=$DB_NAME"
       - '--set-secrets'
       -   "DB_PASS=projects/${_PROJECT_NUMBER}/secrets/appmod-pass"
       - >-
