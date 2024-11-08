@@ -26,6 +26,9 @@ WORKDIR /var/www/html
 # ./ /var/www/html
 COPY . .
 
+RUN chown -R www-data:www-data /var/www/html \
+    && chmod -R 755 /var/www/html
+
 # Use the PORT environment variable in Apache configuration files.
 # https://cloud.google.com/run/docs/reference/container-contract#port
 # Setup the PORT variable
