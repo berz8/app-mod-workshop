@@ -46,7 +46,7 @@ steps:
       -   "PHP_ENV=$_PHP_ENV"
       # This works
       - '--set-secrets'
-      -   "DB_PASS=projects/${_PROJECT_NUMBER}/secrets/php-amarcord-db-pass" # TODO works only for Riccardo, change with your own PROJECT_NUMBER
+      -   "DB_PASS=projects/${_PROJECT_NUMBER}/secrets/appmod-pass" # TODO works only for Riccardo, change with your own PROJECT_NUMBER
       - >-
         --image=$_AR_HOSTNAME/$PROJECT_ID/cloud-run-source-deploy/$REPO_NAME/$_SERVICE_NAME:$COMMIT_SHA
       - >-
@@ -55,7 +55,7 @@ steps:
       - '--quiet'
       # Note to self: non va col services..
       - '--allow-unauthenticated'
-    secretEnv: ['SECRET_MANAGER_DB_PASS']
+    secretEnv: ['DB_PASS']
     env: # https://cloud.google.com/build/docs/configuring-builds/substitute-variable-values=
     # copying RAILS_ENV approach.
     - PHP_ENV=development
@@ -80,7 +80,7 @@ steps:
       - '--set-env-vars'
       -   "DB_NAME=$_DB_NAME"
       - '--set-secrets'
-      -   "DB_PASS=projects/${_PROJECT_NUMBER}/secrets/php-amarcord-db-pass" # TODO works only for Riccardo, change with your own PROJECT_NUMBER
+      -   "DB_PASS=projects/${_PROJECT_NUMBER}/secrets/appmod-pass" # TODO works only for Riccardo, change with your own PROJECT_NUMBER
       - >-
         --image=$_AR_HOSTNAME/$PROJECT_ID/cloud-run-source-deploy/$REPO_NAME/$_SERVICE_NAME:$COMMIT_SHA
       - '--region=$_DEPLOY_REGION'
@@ -108,16 +108,13 @@ substitutions:
   _PLATFORM: managed
   _SERVICE_NAME: php-amarcord
   _EXECUTION_ENVIRONMENT: 'rgc/cloudbuild'
-  _DEVFEST_CITY: modena
-  _GITHUB_USER: friends-of-ricc # change your your own, eg 'gregorio'
-  _PROJECT_NUMBER: "839850161816" # Change it with your own
+  _DEVFEST_CITY: pescara 
+  _GITHUB_USER: berz8 # change your your own, eg 'gregorio'
+  _PROJECT_NUMBER: "894650644502" # Change it with your own
 tags:
   - gcp-cloud-build-deploy-cloud-run
   - php-amarcord
-  - ricc-ne-sa-a-tronchi
 availableSecrets:
   secretManager:
-  # - versionName: projects/$PROJECT_ID/secrets/php-amarcord-db-pass/versions/latest
-  #   env: 'DB_PASS'
-  - versionName: projects/$PROJECT_ID/secrets/php-amarcord-db-pass/versions/latest
-    env: 'SECRET_MANAGER_DB_PASS'
+  - versionName: projects/$PROJECT_ID/secrets/appmod-pass/versions/latest
+    env: 'DB_PASS'
